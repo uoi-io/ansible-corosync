@@ -1,0 +1,7 @@
+---
+# file: roles/corosync/tasks/configuration.yml
+- name: Configuring Corosync
+  template:
+    src=etc/corosync/corosync.conf.j2
+    dest=/etc/corosync/corosync.conf
+  tags: corosync-config

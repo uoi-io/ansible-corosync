@@ -1,0 +1,24 @@
+---
+# file: roles/corosync/tasks/auth.yml
+- name: Check if /etc/corosync/authkey exists
+  stat: path=/etc/corosync/authkey
+  register: authkey_file
+  tags: corosync-keygen
+
+- name: Generate authkey file
+  command: /bin/true
+  notify: corosync-keygen
+  when: authkey_file.stat.exists == False and inventory_hostname == master
+  tags: corosync-keygen
+
+- name: Fetch /etc/corosync/authkey to /tmp
+  fetch: src=/etc/corosync/authkey dest=/tmp/ flat=yes
+  when: authkey_file.stat.exists and inventory_hostname == master
+  tags: corosync-keygen
+
+- name: Synchronize authkey file everywhere
+  copy: src=/tmp/authkey dest=/etc/corosync/authkey
+    owner=root
+    group=root
+    mode=0400
+  tags: corosync-keygen

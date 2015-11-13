@@ -1,0 +1,15 @@
+---
+# file: roles/corosync/tasks/install.yml
+# Debian
+- include: debian.yml
+  when: "ansible_os_family == 'Debian'"
+  tags: corosync-package
+
+# RedHat
+- include: redhat.yml
+  when: "ansible_os_family == 'RedHat'"
+  tags: corosync-package
+
+- name: Enable Corosync service
+  service: name=corosync state=stopped enabled=yes
+  tags: corosync-service

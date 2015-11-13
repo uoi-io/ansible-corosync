@@ -1,0 +1,4 @@
+---
+# file: roles/corosync/handlers/keygen.yml
+- name: corosync-keygen
+  command: /usr/sbin/corosync-keygen

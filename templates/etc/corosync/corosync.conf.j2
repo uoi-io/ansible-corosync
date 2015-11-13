@@ -1,0 +1,174 @@
+{{ ansible_managed }}
+
+totem {
+	version: 2
+        crypto_cipher: {{ corosync_crypto_cipher | default('aes256') }}
+        crypto_hash: {{ corosync_crypto_hash | default('sha256') }}
+{# If multiple rings are defined and corosync_rrp_mode not defined then rrp_mode is set to active #}
+{% if corosync_rrp_mode is not defined and corosync_interfaces|length > 1 %}
+        rrp_mode: active
+{% elif corosync_rrp_mode is defined %}
+        rrp_mode: {{ corosync_rrp_mode }}
+{% endif %}
+        netmtu: {{ corosync_netmtu | default(1500) }}
+        vsftype: {{ corosync_vsftype | default('ykb') }}
+{% if corosync_transport is not defined %}
+{# This corosync_transport variable is set for a condition related to the mcastaddr below of this template #}
+{% set corosync_transport = 'udp' %}
+        transport: udp
+{% else %}
+        transport: {{ corosync_transport }}
+{% endif %}
+        cluster_name: {{ corosync_cluster_name | default('uoi') }}
+{% if corosync_config_version is defined %}
+        config_version: {{ corosync_config_version }}
+{% endif %}
+        ip_version: {{ corosync_ip_version | default('ipv4') }}
+	token: {{ corosync_token | default(1000) }}
+{% if corosync_token_retransmit is defined %}
+	token_retransmit: {{ corosync_token_retransmit }}
+{% endif %}
+{% if corosync_hold is defined %}
+	hold: {{ corosync_hold }}
+{% endif %}
+{% if corosync_token_retransmits_before_loss_const is defined %}
+	token_retransmits_before_loss_const: {{ corosync_token_retransmits_before_loss_const }}
+{% endif %}
+{% if corosync_join is defined %}
+	join: {{ corosync_join }}
+{% endif %}
+{% if corosync_send_join is defined %}
+	send_join: {{ corosync_send_join }}
+{% endif %}
+{% if corosync_consensus is defined %}
+	consensus: {{ corosync_consensus }}
+{% endif %}
+{% if corosync_merge is defined %}
+	merge: {{ corosync_merge }}
+{% endif %}
+{% if corosync_downcheck is defined %}
+        downcheck: {{ corosync_downcheck }}
+{% endif %}
+{% if corosync_fail_recv_const is defined %}
+        fail_recv_const: {{ corosync_fail_recv_const }}
+{% endif %}
+{% if corosync_seqno_unchanged_const is defined %}
+        seqno_unchanged_const: {{ corosync_seqno_unchanged_const }}
+{% endif %}
+{% if corosync_heartbeat_failures_allowed is defined %}
+        heartbeat_failures_allowed: {{ corosync_heartbeat_failures_allowed }}
+{% endif %}
+{% if corosync_max_network_delay is defined %}
+        max_network_delay: {{ corosync_max_network_delay }}
+{% endif %}
+{% if corosync_window_size is defined %}
+        window_size: {{ corosync_window_size }}
+{% endif %}
+{% if corosync_max_messages is defined %}
+        max_messages: {{ corosync_max_messages }}
+{% endif %}
+{% if corosync_miss_count_const is defined %}
+        miss_count_const: {{ corosync_miss_count_const }}
+{% endif %}
+{% if corosync_rrp_problem_count_timeout is defined %}
+        rrp_problem_count_timeout: {{ corosync_rrp_problem_count_timeout }}
+{% endif %}
+{% if corosync_rrp_problem_count_threshold is defined %}
+        rrp_problem_count_threshold: {{ corosync_rrp_problem_count_threshold }}
+{% endif %}
+{% if corosync_rrp_problem_count_mcast_threshold is defined %}
+        rrp_problem_count_mcast_threshold: {{ corosync_rrp_problem_count_mcast_threshold }}
+{% endif %}
+{% if corosync_rrp_token_expired_timeout is defined %}
+        rrp_token_expired_timeout: {{ corosync_rrp_token_expired_timeout }}
+{% endif %}
+{% if corosync_rrp_autorecovery_check_timeout is defined %}
+        rrp_autorecovery_check_timeout: {{ corosync_rrp_autorecovery_check_timeout }}
+{% endif %}
+
+{% if corosync_interfaces is defined %}
+    {% set ringnumber = 0 %}
+    {% set defaults = {} %}
+    {% if corosync_mcastaddr is defined %}
+        {% do defaults.update({ 'mcastaddr': corosync_mcastaddr }) %}
+    {% endif %}
+    {% do defaults.update({ 'mcastport': corosync_mcastport }) %}
+    {% if corosync_ttl is defined %}
+        {% do defaults.update({ 'ttl': corosync_ttl }) %}
+    {% endif %}
+{% endif %}
+
+{% for interface in corosync_interfaces %}
+    {% do interface.update(defaults) %}
+	interface {
+		ringnumber: {{ ringnumber }}
+		bindnetaddr: {{ interface.bindnetaddr }}
+    {% if interface.mcastaddr is defined and corosync_transport != 'udpu' %}
+		mcastaddr: {{ interface.mcastaddr }}
+    {% endif %}
+    {% if interface.mcastport is defined %}
+	mcastport: {{ interface.mcastport }}
+    {% endif %}
+    {% if interface.ttl is defined %}
+	ttl: {{ interface.ttl }}
+    {% endif %}
+	}
+{% set ringnumber = ringnumber + 1 %}
+{% endfor %}
+}
+
+{# nodelist section will be configured only when UDPU (unicast) transport is used #}
+{% if corosync_transport == 'udpu' %}
+{% if corosync_node_list is defined %}
+{% set nodeid = 1 %}
+{% set hostid = 0 %}
+nodelist {
+{% for node in corosync_node_list %}
+	node {
+    {% for interface in corosync_interfaces %}
+		ring{{ ringnumber }}_addr: {{ interface.hosts[hostid] }}
+{% set ringnumber = ringnumber + 1 %}
+    {% endfor %}
+		nodeid: {{ nodeid }}
+	}
+{% set nodeid = nodeid + 1 %}
+{% set hostid = hostid + 1 %}
+{% endfor %}
+}
+{% endif %}
+{% endif %}
+
+{# expected_votes will be defined only when UDPU (unicast) transport is used #}
+quorum {
+        provider: {{ corosync_provider | default('corosync_votequorum') }}
+{% if corosync_expected_votes is defined and corosync_transport != 'udpu'%}
+        expected_votes: {{ corosync_expected_votes }}
+{% endif %}
+}
+
+logging {
+        timestamp: {{ corosync_timestamp | default ('off') }}
+        fileline: {{ corosync_fileline | default('off') }}
+        function_name: {{ corosync_function_name | default('off') }}
+        to_stderr: {{ corosync_to_stderr | default('on') }}
+        to_logfile: {{ corosync_to_logfile | default('off') }}
+        to_syslog: {{ corosync_to_syslog | default('on') }}
+{% if corosync_logfile is defined %}
+        logfile: {{ corosync_logfile }}
+{% endif %}
+        logfile_priority: {{ corosync_logfile_priority | default('info') }}
+        syslog_facility: {{ corosync_syslog_facility | default('daemon') }}
+        syslog_priority: {{ corosync_syslog_priority | default('info') }}
+        debug: {{ corosync_debug | default('off') }}
+	logger_subsys {
+		subsys: {{ corosync_subsys | default('QUORUM') }}
+		debug: {{ corosync_subsys_debug | default('off') }}
+{% if corosync_subsys_tags is defined %}
+		tags: {{ corosync_subsys_tags }}
+{% endif %}
+	}
+}
+
+qb {
+        ipc_type: {{ corosync_ipc_type | default('native') }}
+}
