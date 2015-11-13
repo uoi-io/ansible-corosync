@@ -1,22 +1,22 @@
 ---
 # defaults file for corosync
-corosync_node_list: ['ctrl01', 'ctrl02', 'ctrl03']
-corosync_transport: 'udpu'
+#corosync_node_list: ['ctrl01', 'ctrl02', 'ctrl03']
+#corosync_transport: 'udpu'
 corosync_ttl: 1
 corosync_expected_votes: 3
 
 corosync_interfaces:
   - bindnetaddr: 192.168.56.0
-    mcastaddr: 192.168.56.100
+    mcastaddr: 226.94.1.1
     mcastport: 5405
-    hosts:
-      - 192.168.56.200
-      - 192.168.56.201
-      - 192.168.56.202
-  - bindnetaddr: 227.94.1.0
-    mcastaddr: 227.94.1.1
-    mcastport: 5407
-    hosts:
-      - 227.94.1.10
-      - 227.94.1.11
-      - 227.94.1.12
+#    hosts:
+#      - 192.168.56.200
+#      - 192.168.56.201
+#      - 192.168.56.202
+#  - bindnetaddr: 227.94.1.0
+#    mcastaddr: 227.94.1.1
+#    mcastport: 5407
+#    hosts:
+#      - 227.94.1.10
+#      - 227.94.1.11
+#      - 227.94.1.12

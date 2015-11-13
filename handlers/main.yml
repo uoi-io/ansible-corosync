@@ -1,3 +1,4 @@
 ---
 # handlers file for corosync
 - include: keygen.yml
+- include: restart.yml
