@@ -1,5 +1,5 @@
 ---
-# tasks file for corosync
+# file: roles/corosync/main.yml
 - include: install.yml
 - include: auth.yml
 - include: configuration.yml

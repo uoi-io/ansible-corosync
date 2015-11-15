@@ -1,13 +1,13 @@
 ---
 # file: roles/corosync/tasks/install.yml
-# Debian
-- include: debian.yml
-  when: "ansible_os_family == 'Debian'"
+- name: Install Corosync packages (Debian family)
+  apt: name=corosync state=latest update_cache=yes
+  when: ansible_os_family == 'Debian'
   tags: corosync-package
 
-# RedHat
-- include: redhat.yml
-  when: "ansible_os_family == 'RedHat'"
+- name: Install Corosync packages (RedHat family
+  yum: name=corosync state=latest update_cache=yes
+  when: ansible_os_family == 'RedHat'
   tags: corosync-package
 
 - name: Enable Corosync service
