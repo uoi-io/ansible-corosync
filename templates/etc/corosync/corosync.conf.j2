@@ -91,7 +91,9 @@ totem {
     {% if corosync_mcastaddr is defined %}
         {% do defaults.update({ 'mcastaddr': corosync_mcastaddr }) %}
     {% endif %}
-    {% do defaults.update({ 'mcastport': corosync_mcastport }) %}
+    {% if corosync_mcastport is defined %}
+        {% do defaults.update({ 'mcastport': corosync_mcastport }) %}
+    {% endif %}
     {% if corosync_ttl is defined %}
         {% do defaults.update({ 'ttl': corosync_ttl }) %}
     {% endif %}
