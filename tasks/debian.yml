@@ -1,4 +1,0 @@
----
-# file: roles/corosync/tasks/debian.yml
-- name: Install Corosync packages
-  apt: name=corosync state=latest update_cache=yes

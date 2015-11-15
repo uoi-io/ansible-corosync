@@ -1,4 +1,0 @@
----
-# file: roles/corosync/tasks/redhat.yml
-- name: Install Corosync packages
-  yum: name=corosync state=latest update_cache=yes

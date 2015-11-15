@@ -1,5 +1,4 @@
 {{ ansible_managed }}
-
 totem {
 	version: 2
         crypto_cipher: {{ corosync_crypto_cipher | default('aes256') }}
