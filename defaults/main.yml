@@ -1,5 +1,6 @@
 ---
-# defaults file for corosync
+# file: roles/corosync/defaults/main.yml
+corosync_firewalld: true
 #corosync_node_list: ['ctrl01', 'ctrl02', 'ctrl03']
 #corosync_transport: 'udpu'
 corosync_ttl: 1
@@ -9,14 +10,16 @@ corosync_interfaces:
   - bindnetaddr: 192.168.56.0
     mcastaddr: 226.94.1.1
     mcastport: 5405
-#    hosts:
-#      - 192.168.56.200
-#      - 192.168.56.201
-#      - 192.168.56.202
+    ttl: 1
+#    members:
+#      - 226.94.1.10
+#      - 226.94.1.11
+#      - 226.94.1.12
 #  - bindnetaddr: 227.94.1.0
 #    mcastaddr: 227.94.1.1
 #    mcastport: 5407
-#    hosts:
+#    ttl: 100
+#    members:
 #      - 227.94.1.10
 #      - 227.94.1.11
 #      - 227.94.1.12
