@@ -13,53 +13,52 @@ None.
 ## Role Variables
 The description of all options is available here: http://manpages.ubuntu.com/manpages/wily/man5/corosync.conf.5.html
 ```
-corosync_crypto_cipher | default('aes256')
-corosync_crypto_hash | default('sha256')
-corosync_rrp_mode
-corosync_netmtu | default(1500)
-corosync_vsftype | default('ykb')
-corosync_transport
-corosync_cluster_name | default('uoi')
-corosync_config_version
-corosync_ip_version | default('ipv4')
-corosync_token | default(1000) 
-corosync_token_retransmit 
-corosync_hold 
-corosync_token_retransmits_before_loss_const 
-corosync_join 
-corosync_send_join 
-corosync_consensus 
-corosync_merge 
-corosync_downcheck 
-corosync_fail_recv_const 
-corosync_seqno_unchanged_const 
-corosync_heartbeat_failures_allowed 
-corosync_max_network_delay 
-corosync_window_size 
-corosync_max_messages 
-corosync_miss_count_const 
-corosync_rrp_problem_count_timeout 
-corosync_rrp_problem_count_threshold 
-corosync_rrp_problem_count_mcast_threshold 
-corosync_rrp_token_expired_timeout 
-corosync_rrp_autorecovery_check_timeout 
-corosync_provider | default('corosync_votequorum') 
-corosync_expected_votes 
-corosync_timestamp | default ('off') 
-corosync_fileline | default('off') 
-corosync_function_name | default('off') 
-corosync_to_stderr | default('on') 
-corosync_to_logfile | default('off') 
-corosync_to_syslog | default('on') 
-corosync_logfile 
-corosync_logfile_priority | default('info') 
-corosync_syslog_facility | default('daemon') 
-corosync_syslog_priority | default('info') 
-corosync_debug | default('off') 
-corosync_subsys | default('QUORUM') 
-corosync_subsys_debug | default('off')
-corosync_subsys_tags
-corosync_ipc_type | default('native')
+    corosync_crypto_cipher | default('aes256')
+    corosync_crypto_hash | default('sha256')
+    corosync_rrp_mode
+    corosync_netmtu | default(1500)
+    corosync_vsftype | default('ykb')
+    corosync_transport
+    corosync_cluster_name | default('uoi')
+    corosync_config_version
+    corosync_ip_version | default('ipv4')
+    corosync_token | default(1000)
+    corosync_token_retransmit
+    corosync_hold
+    corosync_token_retransmits_before_loss_const
+    corosync_join
+    corosync_send_join
+    corosync_consensus
+    corosync_merge
+    corosync_downcheck
+    corosync_fail_recv_const
+    corosync_seqno_unchanged_const
+    corosync_heartbeat_failures_allowed
+    corosync_max_network_delay
+    corosync_window_size
+    corosync_max_messages
+    corosync_miss_count_const
+    corosync_rrp_problem_count_timeout
+    corosync_rrp_problem_count_threshold
+    corosync_rrp_problem_count_mcast_threshold
+    corosync_rrp_token_expired_timeout
+    corosync_rrp_autorecovery_check_timeout
+    corosync_provider | default('corosync_votequorum')
+    corosync_expected_votes
+    corosync_timestamp | default ('off')
+    corosync_fileline | default('off')
+    corosync_to_stderr | default('on')
+    corosync_to_logfile | default('off')
+    corosync_to_syslog | default('on')
+    corosync_logfile
+    corosync_logfile_priority | default('info')
+    corosync_syslog_facility | default('daemon')
+    corosync_syslog_priority | default('info')
+    corosync_debug | default('off')
+    corosync_subsys | default('QUORUM')
+    corosync_subsys_debug | default('off')
+    corosync_subsys_tags
+    corosync_ipc_type | default('native')
 ```
 
 ## Dependencies
