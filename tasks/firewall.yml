@@ -1,0 +1,10 @@
+---
+# file: roles/corosync/tasks/firewall.yml
+- name: Corosync firewalld rule
+  firewalld: port={{ item.mcastport - 1 }}-{{ item.mcastport }}/udp
+    permanent=true
+    state=enabled
+    immediate=true
+  with_items:
+    - "{{ corosync_interfaces }}"
+  tags: corosync-firewall
