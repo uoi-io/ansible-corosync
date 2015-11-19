@@ -2,9 +2,12 @@ Ansible Role: Corosync
 =========
 
 Install Corosync on CentOS 7 and Debian 8 Jessie distributions.
-The role supports multicast and unicast protocols.
 
-Only the version 2 is supported.
+The role supports protocols:
+- Multicast
+- Unicast 
+
+Only the version 2 of Corosync is supported by this role.
 
 Requirements
 ------------
