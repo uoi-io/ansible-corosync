@@ -49,10 +49,9 @@ corosync_interfaces:
     ttl: 100
 ```
 The following example will create a Corosync cluster using unicast with two rings, if unicast is used you have to define the corosync_transport: udpu and define corosync_node_list as an array.
-## Unicast
+### Unicast
 ```
 ---
-# file: roles/corosync/defaults/main.yml
 corosync_firewalld: true
 corosync_node_list: ['ctrl01', 'ctrl02', 'ctrl03']
 corosync_transport: 'udpu'
