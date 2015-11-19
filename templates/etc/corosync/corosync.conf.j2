@@ -87,20 +87,9 @@ totem {
 
 {% if corosync_interfaces is defined %}
     {% set ringnumber = 0 %}
-    {% set defaults = {} %}
-    {% if corosync_mcastaddr is defined %}
-        {% do defaults.update({ 'mcastaddr': corosync_mcastaddr }) %}
-    {% endif %}
-    {% if corosync_mcastport is defined %}
-        {% do defaults.update({ 'mcastport': corosync_mcastport }) %}
-    {% endif %}
-    {% if corosync_ttl is defined %}
-        {% do defaults.update({ 'ttl': corosync_ttl }) %}
-    {% endif %}
 {% endif %}
 
 {% for interface in corosync_interfaces %}
-    {% do interface.update(defaults) %}
 	interface {
 		ringnumber: {{ ringnumber }}
 		bindnetaddr: {{ interface.bindnetaddr }}
@@ -127,7 +116,7 @@ nodelist {
 {% for node in corosync_node_list %}
 	node {
     {% for interface in corosync_interfaces %}
-		ring{{ ringnumber }}_addr: {{ interface.hosts[hostid] }}
+		ring{{ ringnumber }}_addr: {{ interface.members[hostid] }}
 {% set ringnumber = ringnumber + 1 %}
     {% endfor %}
 		nodeid: {{ nodeid }}
