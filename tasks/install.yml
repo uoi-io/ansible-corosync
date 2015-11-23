@@ -3,13 +3,19 @@
 - name: Install Corosync packages (Debian family)
   apt: name=corosync state=latest update_cache=yes
   when: ansible_os_family == 'Debian'
-  tags: corosync-package
+  tags:
+    - corosync
+    - corosync-package
 
-- name: Install Corosync packages (RedHat family
+- name: Install Corosync packages (RedHat family)
   yum: name=corosync state=latest update_cache=yes
   when: ansible_os_family == 'RedHat'
-  tags: corosync-package
+  tags:
+    - corosync
+    - corosync-package
 
 - name: Enable Corosync service
   service: name=corosync state=stopped enabled=yes
-  tags: corosync-service
+  tags:
+    - corosync
+    - corosync-service

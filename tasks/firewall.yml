@@ -7,4 +7,6 @@
     immediate=true
   with_items:
     - "{{ corosync_interfaces }}"
-  tags: corosync-firewall
+  tags:
+    - corosync
+    - corosync-firewall
