@@ -122,7 +122,7 @@ corosync_interfaces:
 ```
 
 ## License
-BSD
+Apache
 
 ## Author Information
 This role was created in 2015 by Gaëtan Trellu (goldyfruit).
