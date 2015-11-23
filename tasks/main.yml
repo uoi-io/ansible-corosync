@@ -3,7 +3,7 @@
 - include: install.yml
 
 - include: firewall.yml
-  when: corosync_firewalld is defined and corosync_firewalld == true
+  when: corosync_firewalld and corosync_firewalld == true
 
 - include: auth.yml
 - include: configuration.yml
