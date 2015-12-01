@@ -8,8 +8,7 @@
     - corosync-keygen
 
 - name: Generate authkey file
-  command: /bin/true
-  notify: corosync-keygen
+  command: /usr/sbin/corosync-keygen
   when: authkey_file.stat.exists == False and inventory_hostname == master
   tags:
     - corosync
