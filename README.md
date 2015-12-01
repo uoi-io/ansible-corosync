@@ -107,14 +107,14 @@ corosync_transport: 'udpu'
 corosync_interfaces:
   - bindnetaddr: 192.168.56.0
     mcastaddr: 226.94.1.1
-    ttl: 20
+    mcastport: 5405
     members:
       - 226.94.1.10
       - 226.94.1.11
       - 226.94.1.12
   - bindnetaddr: 10.14.130.0
     mcastaddr: 227.94.1.1
-    ttl: 100
+    mcastport: 5407
     members:
       - 227.94.1.10
       - 227.94.1.11
