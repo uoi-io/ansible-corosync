@@ -8,3 +8,5 @@
   tags:
     - corosync
     - corosync-config
+
+- meta: flush_handlers
