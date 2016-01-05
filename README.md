@@ -1,4 +1,4 @@
-# Ansible Corosync
+# Ansible Corosync (OpenStack ready)
 Install Corosync on CentOS 7 and Debian 8 Jessie distributions.
 
 This role supports protocols:
@@ -125,4 +125,4 @@ corosync_interfaces:
 Apache
 
 ## Author Information
-This role was created in 2015 by Gaëtan Trellu (goldyfruit).
+This role was created in 2016 by Gaëtan Trellu (goldyfruit).
