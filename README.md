@@ -101,7 +101,10 @@ The following example will create a Corosync cluster using unicast with two ring
 ```
 ---
 corosync_firewalld: true
-corosync_node_list: ['ctrl01', 'ctrl02', 'ctrl03']
+corosync_node_list:
+  - ctrl01
+  - ctrl02
+  - ctrl03
 corosync_transport: 'udpu'
 
 corosync_interfaces:
