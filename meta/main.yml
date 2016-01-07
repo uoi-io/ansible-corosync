@@ -8,11 +8,12 @@ galaxy_info:
   platforms:
   - name: EL
     versions:
-    - 6
     - 7
   - name: Fedora
     versions:
-    - all
+    - 21
+    - 22
+    - 23
   - name: Ubuntu
     versions:
     - raring
@@ -23,7 +24,6 @@ galaxy_info:
   - name: Debian
     versions:
     - jessie
-    - wheezy
   categories:
   - cloud
   - clustering
