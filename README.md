@@ -4,11 +4,12 @@ Install Corosync on CentOS 7 and Debian 8 Jessie distributions.
 This role supports protocols:
 - Multicast (udp)
 - Unicast (udpu)
+- Multiple rings
 
 Because the version 1 of Coroync is "not supported" anymore, this module provides only a support for the version 2 of Corosync.
 
 ## Requirements
-None.
+This module needs at least 3 nodes and Ansible 1.9.
 
 ## Role Variables
 The description of all options is available here: http://manpages.ubuntu.com/manpages/wily/man5/corosync.conf.5.html
