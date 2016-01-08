@@ -1,15 +1,23 @@
 # Ansible Corosync (OpenStack ready)
-Install Corosync on CentOS 7 and Debian 8 Jessie distributions.
+This module provides support for the installation of Corosync..
 
 This role supports protocols:
 - Multicast (udp)
 - Unicast (udpu)
 - Multiple rings
 
+Supported distributions:
+- CentOS 7.x
+- RedHat EL 7.x
+- Debian 8.x
+
+Works with firewalld and SELinux.  
+If corosync_firewalld is set to true please be sure than firewalld is installed and started.
+
 Because the version 1 of Coroync is "not supported" anymore, this module provides only a support for the version 2 of Corosync.
 
 ## Requirements
-This module needs at least 3 nodes and Ansible 1.9.
+This module needs at least 3 nodes and Ansible 1.9.  
 
 ## Role Variables
 The description of all options is available here: http://manpages.ubuntu.com/manpages/wily/man5/corosync.conf.5.html
@@ -66,7 +74,9 @@ The description of all options is available here: http://manpages.ubuntu.com/man
 None.
 
 ## Example Playbook
-The following example will create a Corosync cluster using multicast, if multicast is used you have to define the expected_votes (3 for three nodes). If you want to configure firewalld rules, be sure that corosync_firewalld is set to true
+The following example will create a Corosync cluster using multicast, if multicast is used you have to define the expected_votes (3 for three nodes).  
+If you want to configure firewalld rules, be sure that corosync_firewalld is set to true
+
 ### Multicast (1 ring)
 ```
 ---
@@ -79,7 +89,6 @@ corosync_interfaces:
     mcastport: 5405
     ttl: 1
 ```
-
 The following example will create a Corosync cluster using multicast with two rings.
 ### Multicast (2 rings)
 ```
