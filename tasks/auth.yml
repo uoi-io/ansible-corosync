@@ -1,7 +1,8 @@
 ---
 # file: roles/corosync/tasks/auth.yml
 - name: Check if /etc/corosync/authkey exists
-  stat: path=/etc/corosync/authkey
+  stat:
+    path=/etc/corosync/authkey
   register: authkey_file
   tags:
     - corosync
