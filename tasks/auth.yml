@@ -25,8 +25,11 @@
     - corosync-keygen
 
 - name: Fetch /etc/corosync/authkey to /tmp
-  fetch: src=/etc/corosync/authkey dest=/tmp/ flat=yes
-  when: authkey_file.stat.exists == True and inventory_hostname == master
+  fetch:
+    src=/etc/corosync/authkey
+    dest=/tmp/
+    flat=yes
+  when: inventory_hostname == master
   tags:
     - corosync
     - corosync-keygen
