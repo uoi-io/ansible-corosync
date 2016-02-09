@@ -15,6 +15,15 @@
     - corosync
     - corosync-keygen
 
+- name: Wait for /etc/corosync/authkey file
+  wait_for:
+    path=/etc/corosync/authkey
+    timeout=30
+  when: inventory_hostname == master
+  tags:
+    - corosync
+    - corosync-keygen
+
 - name: Fetch /etc/corosync/authkey to /tmp
   fetch: src=/etc/corosync/authkey dest=/tmp/ flat=yes
   when: authkey_file.stat.exists == True and inventory_hostname == master
