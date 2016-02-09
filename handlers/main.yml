@@ -1,3 +1,7 @@
 ---
 # handlers file for corosync
-- include: restart.yml
+- name: Restart Corosync
+  service:
+    name=corosync
+    state=restarted
+    enabled=yes
