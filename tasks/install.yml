@@ -15,7 +15,10 @@
     - corosync-package
 
 - name: Enable Corosync service
-  service: name=corosync state=stopped enabled=yes
+  service:
+    name=corosync
+    enabled=yes
+    state=stopped
   tags:
     - corosync
     - corosync-service

@@ -35,7 +35,9 @@
     - corosync-keygen
 
 - name: Synchronize authkey file everywhere
-  copy: src=/tmp/authkey dest=/etc/corosync/authkey
+  copy:
+    src=/tmp/authkey
+    dest=/etc/corosync/authkey
     owner=root
     group=root
     mode=0400
