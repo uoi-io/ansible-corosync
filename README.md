@@ -80,6 +80,7 @@ If you want to configure firewalld rules, be sure that corosync_firewalld is set
 ### Multicast (1 ring)
 ```
 ---
+master: ctrl01
 corosync_firewalld: true
 corosync_expected_votes: 3
 
@@ -93,6 +94,7 @@ The following example will create a Corosync cluster using multicast with two ri
 ### Multicast (2 rings)
 ```
 ---
+master: ctrl01
 corosync_firewalld: true
 corosync_expected_votes: 3
 
@@ -111,6 +113,7 @@ The following example will create a Corosync cluster using unicast with one ring
 If unicast is used you have to define the corosync_transport: udpu and define corosync_node_list as an array.
 ```
 ---
+master: ctrl01
 corosync_firewalld: true
 corosync_node_list:
   - ctrl01
@@ -126,6 +129,7 @@ The following example will create a Corosync cluster using unicast with two ring
 ### Unicast (2 rings)
 ```
 ---
+master: ctrl01
 corosync_firewalld: true
 corosync_node_list:
   - ctrl01
