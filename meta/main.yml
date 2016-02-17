@@ -3,8 +3,14 @@ galaxy_info:
   author: Gaetan Trellu (goldyfruit)
   description: Deploy a Corosync cluster, support unicast and multicast with mutilple rings
   company: InCloudUs
-  license: license (Apache)
+
+  issue_tracker_url: https://github.com/uoi-io/ansible-corosync
+  license: Apache
+
   min_ansible_version: 1.9
+
+  github_branch: https://github.com/uoi-io/ansible-corosync/issues
+
   platforms:
   - name: EL
     versions:
@@ -17,8 +23,10 @@ galaxy_info:
   - name: Debian
     versions:
     - jessie
-  categories:
+
+  galaxy_tags:
   - cloud
   - clustering
   - system
+
 dependencies: []
