@@ -1,5 +1,5 @@
 # Ansible Corosync (OpenStack ready)
-This module provides support for the installation of Corosync..
+This role provides support for the installation of Corosync.
 
 This role supports protocols:
 - Multicast (udp)
@@ -14,10 +14,10 @@ Supported distributions:
 Works with firewalld and SELinux.  
 If corosync_firewalld is set to true please be sure than firewalld is installed and started.
 
-Because the version 1 of Coroync is "not supported" anymore, this module provides only a support for the version 2 of Corosync.
+Because the version 1 of Coroync is "not supported" anymore, this role provides only a support for the version 2 of Corosync.
 
 ## Requirements
-This module needs at least 3 nodes and Ansible 1.9.  
+This role needs at least 3 nodes and Ansible 1.9.  
 
 ## Role Variables
 The description of all options is available here: http://manpages.ubuntu.com/manpages/wily/man5/corosync.conf.5.html
