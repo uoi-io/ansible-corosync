@@ -4,12 +4,12 @@ galaxy_info:
   description: Deploy a Corosync cluster, support unicast and multicast with mutilple rings
   company: InCloudUs
 
-  issue_tracker_url: https://github.com/uoi-io/ansible-corosync
+  issue_tracker_url: https://github.com/uoi-io/ansible-corosync/issues
   license: Apache
 
   min_ansible_version: 1.9
 
-  github_branch: https://github.com/uoi-io/ansible-corosync/issues
+  github_branch: https://github.com/uoi-io/ansible-corosync
 
   platforms:
   - name: EL
