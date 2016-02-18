@@ -18,7 +18,6 @@
   service:
     name=corosync
     enabled=yes
-    state=started
   tags:
     - corosync
     - corosync-service
