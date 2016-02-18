@@ -25,8 +25,8 @@ galaxy_info:
     - jessie
 
   galaxy_tags:
-  - cloud
-  - clustering
-  - system
+    - cloud
+    - clustering
+    - system
 
 dependencies: []
