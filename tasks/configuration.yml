@@ -9,4 +9,12 @@
     - corosync
     - corosync-config
 
+- name: Ensure Corosync service is started
+  service:
+    name=corosync
+    state=started
+  tags:
+    - corosync
+    - corosync-config
+
 - meta: flush_handlers
