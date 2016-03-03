@@ -5,16 +5,10 @@
     src=etc/corosync/corosync.conf.j2
     dest=/etc/corosync/corosync.conf
   notify: Restart Corosync
-  tags:
-    - corosync
-    - corosync-config
 
-- name: Ensure Corosync service is started
+- name: Starting Corosync service
   service:
     name=corosync
     state=started
-  tags:
-    - corosync
-    - corosync-config
 
 - meta: flush_handlers
