@@ -12,6 +12,7 @@ Supported distributions:
 - CentOS 7.x
 - RedHat EL 7.x
 - Debian 8.x
+- Ubuntu 14.x / 15.x
 
 Works with ``firewalld`` daemon and SELinux.
 If ``corosync_firewalld`` is set to ``true`` please make sure than ``firewalld`` package is installed and the service is started.
