@@ -1,5 +1,5 @@
 ---
-# handlers file for corosync
+# file: roles/corosync/handlers/main.yml
 - name: Restart Corosync
   service:
     name=corosync
