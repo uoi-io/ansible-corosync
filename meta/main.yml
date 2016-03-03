@@ -7,7 +7,7 @@ galaxy_info:
   issue_tracker_url: https://github.com/uoi-io/ansible-corosync/issues
   license: Apache
 
-  min_ansible_version: 1.9
+  min_ansible_version: 2.0
 
   github_branch: https://github.com/uoi-io/ansible-corosync
 
