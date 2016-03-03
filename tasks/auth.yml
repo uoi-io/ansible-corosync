@@ -1,46 +1,31 @@
 ---
 # file: roles/corosync/tasks/auth.yml
-- name: Check if /etc/corosync/authkey exists
+- name: Checking if /etc/corosync/authkey exists
   stat:
     path=/etc/corosync/authkey
   register: authkey_file
-  tags:
-    - corosync
-    - corosync-keygen
 
-- name: Generate authkey file
+- name: Generating /eyc/corosync/authkey file
   command: /usr/sbin/corosync-keygen
-  when: authkey_file.stat.exists == False and inventory_hostname == master
-  tags:
-    - corosync
-    - corosync-keygen
+  run_once: true
+  when: authkey_file.stat.exists == False
 
-- name: Wait for /etc/corosync/authkey file
+- name: Waiting for /etc/corosync/authkey file
   wait_for:
     path=/etc/corosync/authkey
     timeout=30
-  when: inventory_hostname == master
-  tags:
-    - corosync
-    - corosync-keygen
+  when: inventory_hostname == play_hosts[0]
 
-- name: Fetch /etc/corosync/authkey to /tmp
+- name: Fetching /etc/corosync/authkey to /tmp
   fetch:
     src=/etc/corosync/authkey
     dest=/tmp/
     flat=yes
-  when: inventory_hostname == master
-  tags:
-    - corosync
-    - corosync-keygen
+  when: inventory_hostname == play_hosts[0]
 
-- name: Synchronize authkey file everywhere
+- name: Synchronizing /etc/corosync/authkey everywhere
   copy:
     src=/tmp/authkey
     dest=/etc/corosync/authkey
-    owner=root
-    group=root
     mode=0400
-  tags:
-    - corosync
-    - corosync-keygen
+  when: inventory_hostname != play_hosts[0]
