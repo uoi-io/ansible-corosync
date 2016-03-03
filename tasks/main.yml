@@ -1,9 +1,15 @@
 ---
 # file: roles/corosync/main.yml
 - include: install.yml
+  tags: [ corosync, corosync-install ]
 
 - include: firewall.yml
-  when: corosync_firewalld and corosync_firewalld == true
+  when: corosync_firewalld is defined and
+        corosync_firewalld
+  tags: [ corosync, corosync-firewall ]
 
 - include: auth.yml
+  tags: [ corosync, corosync-auth ]
+
 - include: configuration.yml
+  tags: [ corosync, corosync-config ]
