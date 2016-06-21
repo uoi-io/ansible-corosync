@@ -4,6 +4,7 @@
   package:
     name=corosync
     state=latest
+  when: ansible_distribution_release != 'jessie'
 
 - name: Enable Corosync service
   service:

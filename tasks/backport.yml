@@ -1,0 +1,14 @@
+---
+# file: roles/common/tasks/backport.yml
+- name: Adding official Debian backports repository (Debian Jessie only)
+  apt_repository:
+    repo="{{ corosync_apt_backports }}"
+    state=present
+    update_cache=yes
+
+- name: Install Corosync packages (Debian Jessie only)
+  apt:
+    name=corosync
+    state=latest
+    update_cache=yes
+    default_release="{{ corosync_default_release }}"

@@ -1,2 +1,4 @@
 ---
-# vars file for corosync
+# file: roles/corosync/vars/main.yml
+corosync_apt_backports: "deb http://ftp.debian.org/debian jessie-backports main"
+corosync_default_release: jessie-backports

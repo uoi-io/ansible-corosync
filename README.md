@@ -12,7 +12,7 @@ Supported distributions:
 - CentOS 7.x
 - RedHat EL 7.x
 - Debian 8.x
-- Ubuntu 14.x / 15.x
+- Ubuntu 14.x / 15.x / 16.x
 
 Works with ``firewalld`` daemon and SELinux.
 If ``corosync_firewalld`` is set to ``true`` please make sure than ``firewalld`` package is installed and the service is started.
@@ -91,6 +91,8 @@ The following example will create a Corosync cluster using ``multicast``, if ``m
 
 As said above, if you want to configure ``firewalld`` rules, be sure that ``corosync_firewalld`` is set to ``true``.
 
+It's possible to use official Debian backports to have the latest Corosync version, just enable it via `corosync_debian_backports` set to ``true``.
+
 ### Multicast (1 ring)
 ```
 ---
@@ -108,6 +110,7 @@ The following example will create a Corosync cluster using ``multicast`` with tw
 ```
 ---
 corosync_firewalld: true
+corosync_debian_backports: true
 corosync_expected_votes: 3
 
 corosync_interfaces:
@@ -126,6 +129,7 @@ If ``unicast`` is used, you will have to define ``corosync_transport: udpu`` and
 ```
 ---
 corosync_firewalld: true
+corosync_debian_backports: true
 corosync_node_list:
   - ctrl01
   - ctrl02
@@ -141,6 +145,7 @@ The following example will create a Corosync cluster using ``unicast`` with two 
 ```
 ---
 corosync_firewalld: true
+corosync_debian_backports: true
 corosync_node_list:
   - ctrl01
   - ctrl02
@@ -169,4 +174,3 @@ Apache
 
 ## Author Information
 This role was created in 2016 by Gaëtan Trellu (goldyfruit).
-

@@ -1,5 +1,11 @@
 ---
 # file: roles/corosync/main.yml
+- include: backport.yml
+  tags: [ corosync, corosync-backport ]
+  when: ansible_distribution_release == 'jessie' and
+        corosync_debian_backports is defined and
+        corosync_debian_backports
+
 - include: install.yml
   tags: [ corosync, corosync-install ]
 
