@@ -15,22 +15,21 @@ Supported distributions:
 - Ubuntu 14.x / 15.x / 16.x
 
 Works with ``firewalld`` daemon and SELinux.
-If ``corosync_firewalld`` is set to ``true`` please make sure than ``firewalld`` package is installed and the service is started.
 
 Because the version 1 of Corosync is *"not supported"* anymore, this role provides only a support for the version 2 of Corosync.
 
 ## Requirements
-This role needs at least 3 nodes and Ansible 2.0.
+This role needs at least 3 nodes and Ansible 2.x
 
-To generate the Corosync auth key, you will need entropy. If the task ``Generating /eyc/corosync/authkey file`` is stuck it means that you don't have enough entropy. The workaround is to generate entropy with ``haveged`` daemon.
+To generate the Corosync auth key, you will need entropy. If the task ``Generating /eyc/corosync/authkey file`` is stuck it means that you don't have enough entropy. The workaround is to generate entropy with ``haveged`` daemon, enable this option:
 ```
-# yum install haveged -y ; systemctl start haveged
-```
-```
-# apt-get install haveged -y ; systemctl start haveged
+corosync_haveged: true
 ```
 
-This package should be installed only on the first node of your inventory.
+If ``corosync_firewalld`` is set to ``true`` please make sure than ``firewalld`` package is installed and the service is started.
+
+If ``corosync_selinux`` is set to ``true`` please make sure than ``policycoreutils-python`` package is installed.
+
 
 ## Role Variables
 The description of all options is available here: http://manpages.ubuntu.com/manpages/wily/man5/corosync.conf.5.html
@@ -93,10 +92,16 @@ As said above, if you want to configure ``firewalld`` rules, be sure that ``coro
 
 It's possible to use official Debian backports to have the latest Corosync version, just enable it via `corosync_debian_backports` set to ``true``.
 
+The ``corosync_force_regenerate_authkey`` allows you to regenerate the ``/etc/corosync/authkey`` file.
+
 ### Multicast (1 ring)
 ```
 ---
 corosync_firewalld: true
+corosync_selinux: true
+corosync_haveged: true
+corosync_force_regenerate_authkey: false
+corosync_debian_backports: true
 corosync_expected_votes: 3
 
 corosync_interfaces:
@@ -110,6 +115,9 @@ The following example will create a Corosync cluster using ``multicast`` with tw
 ```
 ---
 corosync_firewalld: true
+corosync_selinux: true
+corosync_haveged: true
+corosync_force_regenerate_authkey: false
 corosync_debian_backports: true
 corosync_expected_votes: 3
 
@@ -129,6 +137,9 @@ If ``unicast`` is used, you will have to define ``corosync_transport: udpu`` and
 ```
 ---
 corosync_firewalld: true
+corosync_selinux: true
+corosync_haveged: true
+corosync_force_regenerate_authkey: false
 corosync_debian_backports: true
 corosync_node_list:
   - ctrl01
@@ -145,6 +156,9 @@ The following example will create a Corosync cluster using ``unicast`` with two 
 ```
 ---
 corosync_firewalld: true
+corosync_selinux: true
+corosync_haveged: true
+corosync_force_regenerate_authkey: false
 corosync_debian_backports: true
 corosync_node_list:
   - ctrl01
