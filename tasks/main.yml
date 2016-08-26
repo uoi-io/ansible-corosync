@@ -17,7 +17,11 @@
 - include: firewall.yml
   when: corosync_firewalld is defined and
         corosync_firewalld
-  tags: [ corosync, corosync-firewall ]
+
+- include: selinux.yml
+  tags: [ corosync, corosync-selinux ]
+  when: corosync_selinux is defined and
+        corosync_selinux
 
 - include: auth.yml
   tags: [ corosync, corosync-auth ]

@@ -1,0 +1,9 @@
+---
+# file: roles/corosync/tasks/selinux.yml
+- name: Labeling SELinux UDP ports for Corosync
+  seport:
+    ports="{{ item.mcastport - 1 }}-{{ item.mcastport }}"
+    proto=udp
+    setype=netsupport_port_t
+    state=present
+  with_items: "{{ corosync_interfaces }}"
