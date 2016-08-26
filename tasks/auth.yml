@@ -1,5 +1,13 @@
 ---
 # file: roles/corosync/tasks/auth.yml
+- name: Deleting /etc/corosync/authkey
+  file:
+    path=/etc/corosync/authkey
+    state=absent
+  run_once: true
+  when: corosync_force_regenerate_authkey is defined and
+        corosync_force_regenerate_authkey
+
 - name: Checking if /etc/corosync/authkey exists
   stat:
     path=/etc/corosync/authkey
