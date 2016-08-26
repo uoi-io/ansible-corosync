@@ -36,4 +36,10 @@
     src=/tmp/authkey
     dest=/etc/corosync/authkey
     mode=0400
-  when: inventory_hostname != play_hosts[0]
+  notify: restart corosync
+
+- name: Cleaning /tmp/authkey file for security reason
+  local_action:
+    file
+      path="{{ corosync_tmp_authkey }}"
+      state=absent
