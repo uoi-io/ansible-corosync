@@ -11,12 +11,13 @@
 - name: Checking if /etc/corosync/authkey exists
   stat:
     path=/etc/corosync/authkey
-  register: authkey_file
+  register: check_authkey_file
 
-- name: Generating /eyc/corosync/authkey file
-  command: /usr/sbin/corosync-keygen
+- name: Generating /etc/corosync/authkey file
+  command:
+    /usr/sbin/corosync-keygen
   run_once: true
-  when: authkey_file.stat.exists == False
+  when: check_authkey_file.stat.exists == False
 
 - name: Waiting for /etc/corosync/authkey file
   wait_for:
@@ -27,13 +28,14 @@
 - name: Fetching /etc/corosync/authkey to /tmp
   fetch:
     src=/etc/corosync/authkey
-    dest=/tmp/
+    dest="{{ corosync_tmp_authkey }}"
     flat=yes
-  when: inventory_hostname == play_hosts[0]
+  run_once: true
+  register: authkey
 
 - name: Synchronizing /etc/corosync/authkey everywhere
   copy:
-    src=/tmp/authkey
+    src="{{ corosync_tmp_authkey }}"
     dest=/etc/corosync/authkey
     mode=0400
   notify: restart corosync
