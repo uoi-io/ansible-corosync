@@ -6,5 +6,4 @@
     permanent=true
     state=enabled
     immediate=true
-  with_items:
-    - "{{ corosync_interfaces }}"
+  with_items: "{{ corosync_interfaces }}"

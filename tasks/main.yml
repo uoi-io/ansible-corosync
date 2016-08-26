@@ -15,6 +15,7 @@
         corosync_haveged
 
 - include: firewall.yml
+  tags: [ corosync, corosync-firewall ]
   when: corosync_firewalld is defined and
         corosync_firewalld
 

@@ -1,12 +1,14 @@
 ---
 # file: roles/corosync/tasks/install.yml
-- name: Install Corosync packages
+- name: Installing Corosync package
   package:
     name=corosync
     state=latest
-  when: ansible_distribution_release != 'jessie'
+  when: ansible_distribution_release != 'jessie' and
+        corosync_debian_backports is defined and
+        corosync_debian_backports
 
-- name: Enable Corosync service
+- name: Enabling Corosync service
   service:
     name=corosync
     enabled=yes

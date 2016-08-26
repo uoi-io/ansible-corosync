@@ -4,9 +4,9 @@
   template:
     src=etc/corosync/corosync.conf.j2
     dest=/etc/corosync/corosync.conf
-  notify: Restart Corosync
+  notify: restart corosync
 
-- name: Starting Corosync service
+- name: Making sure that Corosync service is started
   service:
     name=corosync
     state=started

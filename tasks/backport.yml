@@ -6,7 +6,7 @@
     state=present
     update_cache=yes
 
-- name: Install Corosync packages (Debian Jessie only)
+- name: Installing Corosync package (Debian Jessie only)
   apt:
     name=corosync
     state=latest

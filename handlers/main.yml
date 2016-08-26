@@ -1,7 +1,6 @@
 ---
 # file: roles/corosync/handlers/main.yml
-- name: Restart Corosync
+- name: restart corosync
   service:
     name=corosync
     state=restarted
-    enabled=yes

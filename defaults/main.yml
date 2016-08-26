@@ -9,7 +9,7 @@ corosync_node_list:
   - ctrl01
   - ctrl02
   - ctrl03
-corosync_transport: 'udpu'
+corosync_transport: udpu
 corosync_interfaces:
   - bindnetaddr: 192.168.56.0
     mcastport: 5405
