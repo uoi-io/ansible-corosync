@@ -1,6 +1,7 @@
 ---
 # file: roles/corosync/defaults/main.yml
 corosync_firewalld: true
+corosync_haveged: true
 corosync_force_regenerate_authkey: false
 corosync_debian_backports: true
 corosync_node_list:

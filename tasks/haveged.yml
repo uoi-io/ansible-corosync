@@ -1,0 +1,12 @@
+---
+# file: roles/corosync/tasks/haveged.yml
+- name: Installing haveged package
+  package:
+    name=haveged
+    state=latest
+
+- name: Enabling and starting haveged service
+  service:
+    name=haveged
+    state=started
+    enabled=yes

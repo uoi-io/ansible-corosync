@@ -9,6 +9,11 @@
 - include: install.yml
   tags: [ corosync, corosync-install ]
 
+- include: haveged.yml
+  tags: [ corosync, corosync-haveged ]
+  when: corosync_haveged is defined and
+        corosync_haveged
+
 - include: firewall.yml
   when: corosync_firewalld is defined and
         corosync_firewalld
