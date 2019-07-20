@@ -41,6 +41,8 @@
   notify: restart corosync
 
 - name: Cleaning /tmp/authkey file for security reason
+  become: no
+  sudo: no
   local_action:
     file
       path="{{ corosync_tmp_authkey }}"
