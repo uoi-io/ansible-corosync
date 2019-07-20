@@ -1,8 +1,10 @@
 # {{ ansible_managed }}
 totem {
 	version: 2
+{% if corosync_transport is defined and corosync_transport == 'knet' %} 
         crypto_cipher: {{ corosync_crypto_cipher | default('aes256') }}
         crypto_hash: {{ corosync_crypto_hash | default('sha256') }}
+{% endif %}
 {# If multiple rings are defined and corosync_rrp_mode not defined then rrp_mode is set to active #}
 {% if corosync_rrp_mode is not defined and corosync_interfaces|length > 1 %}
         rrp_mode: active
