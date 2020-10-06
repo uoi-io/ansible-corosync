@@ -25,24 +25,17 @@
     timeout=30
   when: inventory_hostname == play_hosts[0]
 
-- name: Fetching /etc/corosync/authkey to /tmp
-  fetch:
+- name: Fetching /etc/corosync/authkey
+  slurp:
     src=/etc/corosync/authkey
-    dest="{{ corosync_tmp_authkey }}"
-    flat=yes
-  run_once: true
-  register: authkey
+    run_once: true
+  register: tmp_authkey
+  when: inventory_hostname == play_hosts[0]
 
 - name: Synchronizing /etc/corosync/authkey everywhere
   copy:
-    src="{{ corosync_tmp_authkey }}"
+    content="{{ tmp_authkey }}"
     dest=/etc/corosync/authkey
     mode=0400
   notify: restart corosync
-
-- name: Cleaning /tmp/authkey file for security reason
-  become: no
-  local_action:
-    file
-      path="{{ corosync_tmp_authkey }}"
-      state=absent
+  when: inventory_hostname not play_hosts[0]
